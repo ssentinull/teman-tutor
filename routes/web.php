@@ -14,3 +14,16 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function($router)
+	{
+
+		//Routes for CRUD method on Users object
+		$router->post('users', 'UsersController@add');
+		$router->get('users/{id}', 'UsersController@view');
+		$router->put('users/{id}', 'UsersController@edit');
+		$router->delete('users/{id}', 'UsersController@delete');
+		$router->get('users', 'UsersController@allUser');
+
+	});
+
