@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
       ]); 
 
       DB::table('users')->insert([
-          'name' => str_random(10).'@gmail.com',
+          'name' => str_random(10),
           'email' => str_random(10).'@gmail.com',
           'password' => '12345',
           'api_token' => str_random(10),
