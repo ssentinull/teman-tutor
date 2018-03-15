@@ -29,4 +29,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password', 'api_token', 'remember_token'
     ];
+
+    public function groups(){
+
+        return $this->belongsToMany('App\Group');
+
+    }
 }

@@ -26,6 +26,12 @@
 					return response()->json($user);
 				}
 
+			public function groups($id)
+				{
+					$groups = User::find($id)->groups;
+					return response()->json($groups);
+				}
+
 			//method to edit an account based on the given 'id'
 			public function edit(Request $request, $id)
 				{
@@ -45,7 +51,7 @@
 				}
 
 			//method to display all accounts in the database
-			public function allUser()
+			public function allUsers()
 				{
 					// $users = User::all();
 					$users = DB::table('users')->get();
