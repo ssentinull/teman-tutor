@@ -18,12 +18,21 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function($router)
 	{
 
-		//Routes for CRUD method on Users object
+		//Routes for CRUD method on User object
 		$router->post('users', 'UsersController@add');
 		$router->get('users/{id}', 'UsersController@view');
+		$router->get('users/{id}/groups', 'UsersController@groups');
 		$router->put('users/{id}', 'UsersController@edit');
 		$router->delete('users/{id}', 'UsersController@delete');
-		$router->get('users', 'UsersController@allUser');
+		$router->get('users', 'UsersController@allUsers');
+
+		//Routes for CRUD method on Group object
+		$router->post('groups', 'GroupsController@add');
+		$router->get('groups/{id}', 'GroupsController@view');
+		$router->get('groups/{id}/users', 'GroupsController@users');
+		$router->put('groups/{id}', 'GroupsController@edit');
+		$router->delete('groups/{id}', 'GroupsController@delete');
+		$router->get('groups', 'GroupsController@allGroups');
 
 	});
 
