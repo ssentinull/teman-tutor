@@ -10,6 +10,8 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 class Group extends Model implements AuthenticatableContract, AuthorizableContract
 {
+    protected $table = 'Groups';
+    
     use Authenticatable, Authorizable;
 
     /**

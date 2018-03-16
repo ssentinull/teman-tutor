@@ -26,12 +26,6 @@
 					return response()->json($user);
 				}
 
-			public function groups($id)
-				{
-					$groups = User::find($id)->groups;
-					return response()->json($groups);
-				}
-
 			//method to edit an account based on the given 'id'
 			public function edit(Request $request, $id)
 				{
@@ -56,6 +50,14 @@
 					// $users = User::all();
 					$users = DB::table('users')->get();
 					return response()->json($users);
+				}
+
+			// Get the Groups that the User with the
+			// given $id is enrolled in
+			public function groups($id)
+				{
+					$groups = User::find($id)->groups;
+					return response()->json($groups);
 				}
 		}
  ?>
