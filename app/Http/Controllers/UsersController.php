@@ -8,6 +8,13 @@
 
 	class UsersController extends Controller
 		{
+			// Limiting the Methods that could be
+			// used without an 'api_token'
+			function __construct()
+				{
+					$this->middleware('auth', ['only' => ['edit', 'delete', 'groups']]);
+				}
+
 			//method to create a new account
 			public function add(Request $request)
 				{

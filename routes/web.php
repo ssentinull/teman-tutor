@@ -17,7 +17,6 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function($router)
 	{
-
 		// Routes for CRUD method on User object
 		$router->post('users', 'UsersController@add');
 		$router->get('users/{id}', 'UsersController@view');

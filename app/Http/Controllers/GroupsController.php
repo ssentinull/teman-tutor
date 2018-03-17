@@ -9,6 +9,14 @@
 
 	class GroupsController extends Controller
 		{
+			// Limiting the Methods that could be
+			// used without an 'api_token'
+			function __construct()
+				{
+					$this->middleware('auth', ['only' => ['edit', 'delete', 'users', 
+										'addUser',	'acceptUser', 'setAdmin', 'removeUser']]);
+				}
+
 			//  Create a new Group based on the input
 			public function add(Request $request)
 				{
