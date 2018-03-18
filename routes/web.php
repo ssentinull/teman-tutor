@@ -43,5 +43,13 @@ $router->group(['prefix' => 'api'], function($router)
 		$router->post('auth/', 'AuthentificationsController@login');
 		$router->post('auth/{id}', 'AuthentificationsController@logout');
 
+		// Routes for CRUD method on Course object
+		$router->post('courses', 'CoursesController@add');
+		$router->get('courses/{id}', 'CoursesController@view');
+		$router->get('courses/{id}/groups', 'CoursesController@groups');
+		$router->put('courses/{id}', 'CoursesController@edit');
+		$router->delete('courses/{id}', 'CoursesController@delete');
+		$router->get('courses', 'CoursesController@allCourses');
+
 	});
 
