@@ -33,19 +33,19 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->app['auth']->viaRequest('api', function ($request) {
 
-            if($request->header('api_token'))
+            if($request->header('remember_token'))
                 {
-                    $api_token = $request->header('api_token');
+                    $remember_token = $request->header('remember_token');
 
                 }
             else
                 {
-                    $api_token = $request->input('api_token');                
+                    $remember_token = $request->input('remember_token');                
                 }
 
-            if($api_token)
+            if($remember_token)
                 {
-                    return User::where('api_token', $api_token)->first();
+                    return User::where('remember_token', $remember_token)->first();
                 }
         });
     }
