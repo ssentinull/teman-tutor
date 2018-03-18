@@ -13,7 +13,7 @@
 			// used without an 'api_token'
 			function __construct()
 				{
-					$this->middleware('auth', ['only' => ['edit', 'delete', 'users', 
+					$this->middleware('auth', ['only' => ['add', 'edit', 'delete', 'users', 
 										'addUser',	'acceptUser', 'setAdmin', 'removeUser']]);
 				}
 

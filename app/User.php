@@ -20,7 +20,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'api_token'
+        'name', 'email', 'password', 'gender', 'birth_date', 'address', 'api_token', 'remember_token'
     ];
 
     /**
@@ -29,7 +29,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token'
+        'password', 'api_token', 
     ];
 
     public function groups(){

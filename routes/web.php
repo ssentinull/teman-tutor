@@ -39,5 +39,9 @@ $router->group(['prefix' => 'api'], function($router)
 		$router->put('admin/{group_id}/{user_id}', 'GroupsController@setAdmin');
 		$router->delete('groups/{group_id}/{user_id}', 'GroupsController@removeUser');
 
+		// Routes for Logging In and Logging Out 
+		$router->post('auth/', 'AuthentificationsController@login');
+		$router->post('auth/{id}', 'AuthentificationsController@logout');
+
 	});
 
