@@ -39,4 +39,12 @@ class Group extends Model implements AuthenticatableContract, AuthorizableContra
         return $this->belongsToMany('App\User');
 
     }
+
+    // Create a One-To-Many Relationship
+    // with 'Courses' Table
+    public function courses(){
+
+        return $this->belongsTo('App\Course');
+
+    }
 }

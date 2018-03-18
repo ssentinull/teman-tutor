@@ -27,5 +27,21 @@ class Group_UserTableSeeder extends Seeder
           'is_accepted' => 0,
           'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
       ]); 
+
+      DB::table('group_user')->insert([
+          'group_id' => 2,
+          'user_id' => 2,
+          'is_admin' => 1,
+          'is_accepted' => 1,
+          'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+      ]); 
+
+      DB::table('group_user')->insert([
+          'group_id' => 2,
+          'user_id' => 1,
+          'is_admin' => 0,
+          'is_accepted' => 1,
+          'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+      ]); 
     }
 }

@@ -72,13 +72,13 @@
 					return response()->json($groups);
 				}
 
-			// Get the user that is enrolled to the
+			// Get the Users that are enrolled to the
 			// Group with the id of $id
 			public function users($id)
 				{
-					$group = Group::find($id)->users;
+					$users = Group::find($id)->users;
 
-					return response()->json($group);
+					return response()->json($users);
 				}
 
 			// Adding a logged-in User with the given $user_id
