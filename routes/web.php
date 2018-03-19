@@ -40,16 +40,23 @@ $router->group(['prefix' => 'api'], function($router)
 		$router->delete('groups/{group_id}/{user_id}', 'GroupsController@removeUser');
 
 		// Routes for Logging In and Logging Out 
-		$router->post('auth/', 'AuthentificationsController@login');
-		$router->post('auth/{id}', 'AuthentificationsController@logout');
+		$router->post('login/', 'AuthentificationsController@login');
+		$router->post('logout/', 'AuthentificationsController@logout');
 
 		// Routes for CRUD method on Course object
 		$router->post('courses', 'CoursesController@add');
 		$router->get('courses/{id}', 'CoursesController@view');
 		$router->get('courses/{id}/groups', 'CoursesController@groups');
+		$router->get('courses/{id}/tutors', 'CoursesController@tutors');
 		$router->put('courses/{id}', 'CoursesController@edit');
 		$router->delete('courses/{id}', 'CoursesController@delete');
 		$router->get('courses', 'CoursesController@allCourses');
 
+		// Routes for CRUD method on Tutor object
+		$router->post('tutors', 'TutorsController@add');
+		$router->get('tutors/{id}', 'TutorsController@view');
+		$router->put('tutors/{id}', 'TutorsController@edit');
+		$router->delete('tutors/{id}', 'TutorsController@delete');
+		$router->get('tutors', 'TutorsController@allTutors');
 	});
 

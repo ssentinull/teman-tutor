@@ -39,4 +39,12 @@ class Course extends Model implements AuthenticatableContract, AuthorizableContr
         return $this->hasMany('App\Group');
     
     }
+
+    // Create a One-To-Many Relationship
+    // with 'Groups' Table
+    public function tutors(){
+
+        return $this->hasMany('App\Tutor');
+    
+    }
 }
