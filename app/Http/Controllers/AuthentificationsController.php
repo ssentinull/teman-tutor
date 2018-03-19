@@ -57,13 +57,15 @@
 						{
 							$tutor = Tutor::where('email', $email)->first();
 
+							// dd('hello');
+
 							if (Hash::check($request['password'], $tutor->password))
 								{
 									Tutor::where('email', $email)->update(['remember_token' => $tutor->api_token]);
 
 									$tutor = Tutor::where('email', $email)->first();
 
-									return response()->json(['status' => 'Successful Login', 'user' => $tutor]);
+									return response()->json(['status' => 'Successful Login 2', 'user' => $tutor]);
 								}
 							else
 								{
@@ -73,18 +75,18 @@
 				}
 
 			// Logging out the user with the given $id 
-			public function logout(Request $request, $email)
+			public function logout(Request $request)
 				{
 					$email = Input::get('email');
 					if (User::where('email', '=', $email)->exists())
 						{
 							User::where('email', $email)->update(['remember_token' => null]);
-							return 'Successful Logout';
+							return 'Successful Logout User';
 						}
 					else
 						{
 							Tutor::where('email', $email)->update(['remember_token' => null]);
-							return 'Successful Logout';
+							return 'Successful Logout Tutor';
 						}
 					return 'Failed Logout';
 				}

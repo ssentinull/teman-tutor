@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\User;
+use App\Tutor;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
@@ -45,7 +46,14 @@ class AuthServiceProvider extends ServiceProvider
 
             if($remember_token)
                 {
-                    return User::where('remember_token', $remember_token)->first();
+                    if(User::where('remember_token', '=', $remember_token)->exists())
+                        {
+                            return User::where('remember_token', $remember_token)->first();
+                        }
+                    else
+                        {
+                            return Tutor::where('remember_token', $remember_token)->first();
+                        }
                 }
         });
     }
