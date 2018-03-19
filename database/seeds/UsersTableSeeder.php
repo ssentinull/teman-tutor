@@ -14,10 +14,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
       $date = Carbon::create(1997, 5, 28, 0, 0, 0);
-      
+
       DB::table('users')->insert([
           'email' => str_random(10).'@gmail.com',
-          'password' => 'secret',
+          'password' => app('hash')->make('secret'),
           'name' => str_random(10),
           'gender' => 'male',
           'birth_date' => $date->addWeeks(rand(1,52))->format('Y-m-d H:i:s'),
@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
 
       DB::table('users')->insert([
           'email' => str_random(10).'@gmail.com',
-          'password' => '12345',
+          'password' => app('hash')->make('12345'),
           'name' => str_random(10),
           'gender' => 'female',
           'birth_date' => $date->addWeeks(rand(1,52))->format('Y-m-d H:i:s'),

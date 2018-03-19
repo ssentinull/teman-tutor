@@ -1,11 +1,14 @@
 <?php namespace App\Http\Controllers;
 
-	use App\User;
-	use App\Http\Controllers\Controller;
-	use Illuminate\Http\Request;
-	use Illuminate\Hashing\BcryptHasher;
 	use DB;
 	use Auth;
+	use App\User;
+	use App\Tutor;
+	use Illuminate\Http\Request;
+	use App\Http\Controllers\Controller;
+	use Illuminate\Hashing\BcryptHasher;
+	use Illuminate\Support\Facades\Input;
+	use Illuminate\Support\Facades\Hash;
 
 	class AuthentificationsController extends Controller
 		{
@@ -22,32 +25,68 @@
 						'email' => 'required',
 						'password' => 'required',
 					]);
+					
+					// Using Hash
+					// $password = app('hash')->make($request['password']);
 
-					$user = User::where('email', $request->input('email'))->first();
+					// dd($password);
 
-					if($request->input('password') == $user->password)
+					// Without Hash
+					// $password = Input::get('password');
+
+					$email = Input::get('email');
+
+					if (User::where('email', '=', $email)->exists())
 						{
-							$remember_token = $user->api_token;
+							$user = User::where('email', $email)->first();
 
-							User::where('email', $request->input('email'))->update(['remember_token' => $remember_token]);
+							if (Hash::check($request['password'], $user->password))
+								{
+									User::where('email', $email)->update(['remember_token' => $user->api_token]);
 
-							$user = User::where('email', $request->input('email'))->first();
+									$user = User::where('email', $email)->first();
 
-							return response()->json(['status' => 'Successful Login', 'user' => $user]);
+									return response()->json(['status' => 'Successful Login', 'user' => $user]);
+								}
+							else
+								{
+									return 'Fail to Login';
+								}
 						}
 					else
 						{
-							return 'Fail to Login';
-						}
+							$tutor = Tutor::where('email', $email)->first();
 
+							if (Hash::check($request['password'], $tutor->password))
+								{
+									Tutor::where('email', $email)->update(['remember_token' => $tutor->api_token]);
+
+									$tutor = Tutor::where('email', $email)->first();
+
+									return response()->json(['status' => 'Successful Login', 'user' => $tutor]);
+								}
+							else
+								{
+									return 'Fail to Login';
+								}
+						}
 				}
 
 			// Logging out the user with the given $id 
-			public function logout($id)
+			public function logout(Request $request, $email)
 				{
-					User::find($id)->update(['remember_token' => null]);
-
-					return 'Successful Logout';
+					$email = Input::get('email');
+					if (User::where('email', '=', $email)->exists())
+						{
+							User::where('email', $email)->update(['remember_token' => null]);
+							return 'Successful Logout';
+						}
+					else
+						{
+							Tutor::where('email', $email)->update(['remember_token' => null]);
+							return 'Successful Logout';
+						}
+					return 'Failed Logout';
 				}
 		}
  ?>
