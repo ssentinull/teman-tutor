@@ -10,10 +10,10 @@
 		{
 			// Limiting the Methods that could be
 			// used without an 'api_token'
-			// function __construct()
-			// 	{
-			// 		$this->middleware('auth');
-			// 	}
+			function __construct()
+				{
+					$this->middleware('auth', ['only' =>['add', 'edit', 'delete']]);
+				}
 
 			//  Create a new Course based on the input
 			public function add(Request $request)
@@ -70,6 +70,15 @@
 					$groups = Course::find($id)->groups;
 
 					return response()->json($groups);
+				}
+
+			// Get the Tutors that teaches the
+			// Course with the given $id 
+			public function tutors($id)
+				{
+					$tutors = Course::find($id)->tutors;
+
+					return response()->json($tutors);
 				}
 		}
  ?>
