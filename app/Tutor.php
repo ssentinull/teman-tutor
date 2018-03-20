@@ -32,15 +32,27 @@ class Tutor extends Model implements AuthenticatableContract, AuthorizableContra
         'password', 'api_token', 
     ];
 
+    // Create a One-To-Many Relationship
+    // with 'Courses' Table
     public function course(){
 
         return $this->belongsTo('App\Course');
 
     }
 
+    // Create a One-To-Many Relationship
+    // with 'Times' Table
     public function times(){
 
         return $this->hasMany('App\Time');
+
+    }
+
+    // Create a Many-To-Many Relationship
+    // with 'Groups' Table
+    public function groups(){
+
+        return $this->belongsToMany('App\Group');
 
     }
 }
