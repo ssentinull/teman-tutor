@@ -37,6 +37,7 @@
 			public function edit(Request $request, $id)
 				{
 					$user = User::find($id);
+					$request['password'] = app('hash')->make($request['password']);
 					$user->update($request->all());
 
 					return response()->json($user);
