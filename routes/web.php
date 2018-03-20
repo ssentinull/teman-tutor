@@ -34,10 +34,10 @@ $router->group(['prefix' => 'api'], function($router)
 		$router->get('groups', 'GroupsController@allGroups');
 
 		// Routes for Manipulating a User in a Group
-		$router->post('groups/{group_id}/{user_id}', 'GroupsController@addUser');
-		$router->put('groups/{group_id}/{user_id}', 'GroupsController@acceptUser');
-		$router->put('admin/{group_id}/{user_id}', 'GroupsController@setAdmin');
-		$router->delete('groups/{group_id}/{user_id}', 'GroupsController@removeUser');
+		$router->post('groups/{group_id}/{user_id}', 'Group_UserController@add');
+		$router->put('groups/{group_id}/{user_id}', 'Group_UserController@accept');
+		$router->put('admin/{group_id}/{user_id}', 'Group_UserController@setAdmin');
+		$router->delete('groups/{group_id}/{user_id}', 'Group_UserController@delete');
 
 		// Routes for Logging In and Logging Out 
 		$router->post('login/', 'AuthentificationsController@login');
@@ -58,5 +58,11 @@ $router->group(['prefix' => 'api'], function($router)
 		$router->put('tutors/{id}', 'TutorsController@edit');
 		$router->delete('tutors/{id}', 'TutorsController@delete');
 		$router->get('tutors', 'TutorsController@allTutors');
+
+		// Routes for creating a Group Appointment
+		$router->post('apps', 'Group_TutorController@create');
+		$router->put('apps/{group_id}/{tutor_id}', 'Group_TutorController@edit');
+		$router->put('accept/{group_id}/{tutor_id}', 'Group_TutorController@accept');
+		$router->put('decline/{group_id}/{user_id}', 'Group_TutorController@decline');
 	});
 
