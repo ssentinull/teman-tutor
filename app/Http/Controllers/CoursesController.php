@@ -58,7 +58,7 @@
 			public function allCourses()
 				{
 					//   $courses = Course::all();
-					$courses = DB::table('groups')->get();
+					$courses = DB::table('courses')->get();
 
 					return response()->json($courses);
 				}
