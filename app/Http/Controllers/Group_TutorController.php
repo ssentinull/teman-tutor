@@ -13,16 +13,16 @@
 			// used without an 'api_token'
 			function __construct()
 				{
-					$this->middleware('auth', ['only' => ['create', 'accept', 'decline']]);
+					$this->middleware('auth', ['only' => ['create', 'edit', 'accept', 'decline']]);
 				}
 
 			// Create a new Appointment for the Group with the given
 			// $group_id with a Tutor with the given $tutor_id
-			public function create(Request $request)
+			public function create(Request $request, $group_id, $tutor_id)
 				{
 					$group_tutor = Group_Tutor::create([
-						'group_id' => Input::get('group_id'),
-						'tutor_id' => Input::get('tutor_id'),
+						'group_id' => $group_id,
+						'tutor_id' => $tutor_id,
 						'date' => Input::get('date'),
 						// 'hour' => Input::get('hour'),
 						'place' => Input::get('place'),
@@ -33,7 +33,14 @@
 					return response()->json($group_tutor);
 				}	
 
-			//  Edit a Group based on the given $id
+			public function userApps($group_id, $user_id)
+				{
+					$apps = Group_Tutor::where('group_id', $group_id)->get();
+					// $groups = Group::where('user_id', $user_id)->toArray();
+					return response()->json($apps);
+				}
+
+			//  Edit an Appointment based on the given $id
 			public function edit(Request $request, $group_id, $tutor_id)
 				{
 					$group_tutor = Group_Tutor::where('tutor_id', $tutor_id)
