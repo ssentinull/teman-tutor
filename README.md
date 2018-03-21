@@ -64,7 +64,7 @@
 ## Add a Group
 * POST: '/groups'
 * Header: remember_token 
-* Body: name, desc, course_id
+* Body: name, desc, course_id, user_id
 * Return Format: json
 * Data returned:   
 	* from Groups Table;
