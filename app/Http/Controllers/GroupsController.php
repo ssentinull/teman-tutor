@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 	use DB;
+	use App\Group_User;
 	use App\Group;
 	use Illuminate\Http\Request;
 	use App\Http\Controllers\Controller;
@@ -23,12 +24,11 @@
 					// group should be included in the $request
 					
 					// dd($data->all());
-					
 					$group = Group::create($request->all());
 
 					$group_user = Group_User::create([
 						'group_id' => $group->id,
-						'user_id' => (int)$request['id'],
+						'user_id' => (int)$request['user_id'],
 						'is_admin' => 1,
 						'is_accepted' => 1,
 					]);
