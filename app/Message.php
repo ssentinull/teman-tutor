@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-class Group_User extends Model implements AuthenticatableContract, AuthorizableContract
+class Messages extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    protected $table = 'Group_User';
+    protected $table = 'Messages';
 
     use Authenticatable, Authorizable;
 
@@ -20,7 +20,7 @@ class Group_User extends Model implements AuthenticatableContract, AuthorizableC
      * @var array
      */
     protected $fillable = [
-        'group_id', 'user_id', 'is_admin', 'is_accepted',
+        'group_id', 'user_id', 'message', 
     ];
 
     /**
@@ -33,11 +33,10 @@ class Group_User extends Model implements AuthenticatableContract, AuthorizableC
     ];
 
     // Create a One-To-Many Relationship
-    // with 'Messages' Table
-    public function messages(){
+    // with 'Group_user' Table
+    public function course(){
 
-        return $this->hasMany('App\Messages');
-    
+        return $this->belongsTo('App\Group_User');
+
     }
-
 }
