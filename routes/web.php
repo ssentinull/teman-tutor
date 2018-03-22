@@ -61,7 +61,7 @@ $router->group(['prefix' => 'api'], function($router)
 
 		// Routes for creating a Group Appointment
 		$router->post('apps/{group_id}/{tutor_id}', 'Group_TutorController@create');
-		$router->get('apps/{group_id}/{user_id}', 'Group_TutorController@userApps');
+		$router->get('apps/{user_id}', 'Group_TutorController@userApps');
 		$router->put('apps/{group_id}/{tutor_id}', 'Group_TutorController@edit');
 		$router->put('accept/{group_id}/{tutor_id}', 'Group_TutorController@accept');
 		$router->delete('decline/{group_id}/{tutor_id}', 'Group_TutorController@decline');

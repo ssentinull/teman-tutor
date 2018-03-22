@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 	use DB;
+	use App\User;
 	use App\Group_Tutor;
 	use Illuminate\Http\Request;
 	use App\Http\Controllers\Controller;
@@ -33,11 +34,35 @@
 					return response()->json($group_tutor);
 				}	
 
-			public function userApps($group_id, $user_id)
+			// Fetch the Appontments of the User with
+			// the given $user_id from the Groups 
+			// the the User is enrolled in
+			public function userApps($user_id)
 				{
-					$apps = Group_Tutor::where('group_id', $group_id)->get();
-					// $groups = Group::where('user_id', $user_id)->toArray();
-					return response()->json($apps);
+					$groups = User::find($user_id)->groups;
+
+					$j = 0;
+					foreach ($groups as $group)
+						{
+							$apps = Group_Tutor::where('group_id', $group->id)->get();
+							foreach ($apps as $app)
+								{
+									$app1[$j] = array(
+										'id' => $app->id,
+										'group_id' => $app->group_id ,
+										'tutor_id' => $app->tutor_id,
+										'date' => $app->date,
+										'place' => $app->place,
+										'subject' => $app->subject,
+										'is_accepted' => $app->is_accepted,
+										'created_at' => $app->created_at,
+										'updated_at' => $app->updated_at, 
+									);
+									$j++;
+								}
+						}
+						
+					return response($app1);
 				}
 
 			//  Edit an Appointment based on the given $id

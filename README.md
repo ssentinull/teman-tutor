@@ -1,16 +1,14 @@
 # API Documentation:
 
----
 ## Add User
 * POST: '/users'
 * Header: -
-* Body: emil, password, name, gender(string), birth_date(date), address
+* Body: email, password, name, gender(string), birth_date(date), address
 * Return Format: json
 * Data returned:  email, name, gender, birth_date, address, created_at, updated_at
 * Controller Used: UsersController
 * Method Called: add(Request $request)
 
----
 ## View a Single User
 * GET: '/users/{id}'
 * Header: -
@@ -20,7 +18,6 @@
 * Controller Used: UsersController
 * Method Called: view($id)
 
----
 ## View the Groups that a User is enrolled in
 * GET: '/users/{id}/groups'
 * Header: remember_token
@@ -30,7 +27,6 @@
 * Controller Used: UsersController
 * Method Called: groups($id)
 
----
 ## Edit a Single User
 * PUT: '/users/{id}'
 * Header: remember_token 
@@ -40,7 +36,6 @@
 * Controller Used: UsersController
 * Method Called: edit(Request $request, $id)
 
----
 ## Delete a Single User
 * DELETE: '/users/{id}'
 * Header: remember_token 
@@ -50,7 +45,6 @@
 * Controller Used: UsersController
 * Method Called: delete($id)
 
----
 ## View All Users
 * GET: '/users'
 * Header: - 
@@ -60,7 +54,6 @@
 * Controller Used: UsersController
 * Method Called: allUsers()
 
----
 ## Add a Group
 * POST: '/groups'
 * Header: remember_token 
@@ -74,7 +67,6 @@
 * Controller Used: GroupsController
 * Method Called: add(Request $request) (the request should also include the $id of the User who created the Group)
 
----
 ## View a Single Group
 * GET: '/groups/{id}'
 * Header: -
@@ -84,7 +76,6 @@
 * Controller Used: GroupsController
 * Method Called: view($id)
 
----
 ## View all the Users that belong to a Single Group
 * GET: '/groups/{id}/users'
 * Header: -
@@ -94,7 +85,6 @@
 * Controller Used: GroupsController
 * Method Called: users($id)
 
----
 ## Edit a Single Group
 * PUT: '/groups/{id}'
 * Header: remember_token
@@ -104,7 +94,6 @@
 * Controller Used: GroupsController
 * Method Called: edit(Request $request, $id)
 
----
 ## Delete a Single Group
 * DELETE: '/groups/{id}'
 * Header: remember_token
@@ -114,7 +103,6 @@
 * Controller Used: GroupsController
 * Method Called: delete($id)
 
----
 ## View All Groups
 * GET: '/groups'
 * Header: -
@@ -124,7 +112,6 @@
 * Controller Used: GroupsController
 * Method Called: allGroups()
 
----
 ## A User wants to Join a Group
 * POST: '/groups/{group_id}/{user_id}'
 * Header: remember_token
@@ -134,7 +121,6 @@
 * Controller Used: Group_UserController
 * Method Called: addUser($group_id, $user_id)
 
----
 ## A User is Accepted to a Group
 * PUT: '/groups/{group_id}/{user_id}'
 * Header: remember_token
@@ -144,7 +130,6 @@
 * Controller Used: Group_UserController
 * Method Called: accept($group_id, $user_id)
 
----
 ## A User is Set to be an Admin of a Group
 * PUT: '/admin/{group_id}/{user_id}'
 * Header: remember_token
@@ -154,7 +139,6 @@
 * Controller Used: Group_UserController
 * Method Called: setAdmin($group_id, $user_id)
 
----
 ## Remove a User from a Group
 * DELETE: '/groups/{group_id}/{user_id}'
 * Header: remember_token
@@ -164,7 +148,6 @@
 * Controller Used: Group_UserController
 * Method Called: removeUser($group_id, $user_id)
 
----
 ## A User wants to Login to his/her Account
 * POST: '/login'
 * Header: -
@@ -174,7 +157,6 @@
 * Controller Used: AuthentificationsController
 * Method Called: login(Request $request)
 
----
 ## A User wants to Logout to his/her Account
 * POST: '/logout'
 * Header: remember_token
@@ -184,7 +166,6 @@
 * Controller Used: AuthentificationsController
 * Method Called: logout(Request $request)
 
----
 ## Add a Course
 * POST: '/courses'
 * Header: - 
@@ -195,7 +176,6 @@
 * Method Called: add(Request $request)
 * Additional Info: This method is done directly to the DB through phpmyadmin
 
----
 ## View a Course
 * GET: '/courses/{id}'
 * Header: - 
@@ -205,7 +185,6 @@
 * Controller Used: CoursesController
 * Method Called: view($id)
 
----
 ## View the Groups that studies a particular Course
 * GET: '/courses/{id}/groups'
 * Header: - 
@@ -215,7 +194,6 @@
 * Controller Used: CoursesController
 * Method Called: groups($course_id)
 
----
 ## View the Tutors that teaches a particular Course
 * GET: '/courses/{id}/tutors'
 * Header: - 
@@ -225,7 +203,6 @@
 * Controller Used: CoursesController
 * Method Called: tutors($course_id)
 
----
 ## Edit a Course
 * PUT: '/courses/{id}'
 * Header: - 
@@ -236,7 +213,6 @@
 * Method Called: edit(Request $request, $id)
 * Additional Info: This method is done directly to the DB through phpmyadmin
 
----
 ## Delete a Course
 * DELETE: '/courses/{id}'
 * Header: - 
@@ -247,7 +223,6 @@
 * Method Called: delete($id)
 * Additional Info: This method is done directly to the DB through phpmyadmin
 
----
 ## View all of the Courses
 * GET: '/courses'
 * Header: - 
@@ -257,17 +232,15 @@
 * Controller Used: CoursesController
 * Method Called: allCourses()
 
----
 ## Add Tutor
 * POST: '/tutors'
 * Header: -
-* Body: emil, password, name, gender(string), birth_date(date), address, price_rate, ipk, course_id
+* Body: email, password, name, gender(string), birth_date(date), address, price_rate, ipk, course_id
 * Return Format: json
 * Data returned:  email, name, gender, birth_date, address, price_rate, ipk, course_id created_at, updated_at
 * Controller Used: TutorsController
 * Method Called: add(Request $request)
 
----
 ## View a Single Tutor
 * GET: '/tutors/{id}'
 * Header: -
@@ -277,7 +250,6 @@
 * Controller Used: TutorsController
 * Method Called: view($id)
 
----
 ## Edit a Single Tutor
 * PUT: '/tutors/{id}'
 * Header: remember_token 
@@ -287,7 +259,6 @@
 * Controller Used: TutorsController
 * Method Called: edit(Request $request, $id)
 
----
 ## Delete a Single Tutor 
 * DELETE: '/tutors/{id}'
 * Header: remember_token 
@@ -297,7 +268,6 @@
 * Controller Used: TutorsController
 * Method Called: delete($id)
 
----
 ## View All Tutors
 * GET: '/tutors'
 * Header: - 
@@ -307,7 +277,6 @@
 * Controller Used: TutorsController
 * Method Called: allTutors()
 
----
 ## Create a new Appointment
 * POST: '/apps/{group_id}/{tutor_id}'
 * Header: remember_token
@@ -317,7 +286,15 @@
 * Controller Used: Group_TutorController
 * Method Called: create(Request $request, $group_id, $tutor_id)
 
----
+## View a User's Appointments
+* GET: '/apps/{tutor_id}'
+* Header: remember_token
+* Body: -
+* Return Format: json-array
+* Data returned:  id, group_id, tutor_id, date, place, subject, is_accepted, created_at, updated_at
+* Controller Used: Group_TutorController
+* Method Called: userApps($tutor_id)
+
 ## Edit a Single Appointment
 * PUT: '/apps/{group_id}/{user_id}'
 * Header: remember_token 
@@ -327,7 +304,6 @@
 * Controller Used: Group_TutorController
 * Method Called: edit(Request $request, $group_id, $user_id)
 
----
 ## Accept an Appointment 
 * PUT: '/accept/{group_id}/{tutor_id}'
 * Header: remember_token 
@@ -337,7 +313,6 @@
 * Controller Used: Group_TutorController
 * Method Called: accept($group_id, $tutor_id)
 
----
 ## Decline an Appointment
 * DELETE: '/decline/{group_id}/{tutor_id}'
 * Header: remember_token 
