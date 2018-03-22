@@ -6,7 +6,6 @@
 	use App\Http\Controllers\Controller;
 	use Illuminate\Hashing\BcryptHasher;
 	use Illuminate\Support\Facades\Input;
-	use Symfony\Component\HttpFoundation\Response;
 
 	class MessagesController extends Controller
 		{
@@ -22,7 +21,7 @@
 				{
 					$message = Message::create($request->all());
 
-					return response()->json($message, $response->getStatusCode());
+					return response()->json($message, 200);
 				}
 
 			// View Messages that was sent from within
@@ -33,7 +32,7 @@
 														->sortBy('created_at')
 														->get();
 
-					return response()->json($messages, $response->getStatusCode());
+					return response()->json($messages, 200);
 				}
 
 			// Delete a Message with the given $id in
@@ -42,7 +41,7 @@
 				{
 					$message = Message::find($id)->delete();
 
-					return response()->json('Removed Successfully', $response->getStatusCode());
+					return response()->json('Removed Successfully', 200);
 				}
 		}
  ?>

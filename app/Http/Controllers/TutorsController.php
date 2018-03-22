@@ -5,7 +5,6 @@
 	use Illuminate\Http\Request;
 	use App\Http\Controllers\Controller;
 	use Illuminate\Hashing\BcryptHasher;
-	use Symfony\Component\HttpFoundation\Response;
 
 	class TutorsController extends Controller
 		{
@@ -24,7 +23,7 @@
 					$tutor = Tutor::create($request->all());
 					// dd($request->all());
 
-					return response()->json($tutor, $response->getStatusCode());
+					return response()->json($tutor, 200);
 				}
 
 			// View an Tutor based on the given 'id'
@@ -32,7 +31,7 @@
 				{
 					$tutor = Tutor::find($id);
 
-					return response()->json($tutor, $response->getStatusCode());
+					return response()->json($tutor, 200);
 				}
 
 			// Edit a Tutor based on the given 'id'
@@ -41,7 +40,7 @@
 					$tutor = Tutor::find($id);
 					$tutor->update($request->all());
 
-					return response()->json($tutor, $response->getStatusCode());
+					return response()->json($tutor, 200);
 				}
 
 			// Delete a Tutor based on the given 'id'
@@ -50,7 +49,7 @@
 					$tutor = Tutor::find($id);
 					$tutor->delete();
 
-					return response()->json('Removed Successfully', $response->getStatusCode());
+					return response()->json('Removed Successfully', 200);
 				}
 
 			// View all Tutors in the database
@@ -59,7 +58,7 @@
 					// $tutors = Tutor::all();
 					$tutors = DB::table('tutors')->get();
 
-					return response()->json($tutors, $response->getStatusCode());
+					return response()->json($tutors, 200);
 				}
 		}
  ?>

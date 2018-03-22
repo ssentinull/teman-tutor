@@ -5,7 +5,6 @@
 	use Illuminate\Http\Request;
 	use App\Http\Controllers\Controller;
 	use Illuminate\Hashing\BcryptHasher;
-	use Symfony\Component\HttpFoundation\Response;
 
 	class CoursesController extends Controller
 		{
@@ -21,7 +20,7 @@
 				{	
 					$course = Course::create($request->all());
 
-					return response()->json($course, $response->getStatusCode());
+					return response()->json($course, 200);
 				}
 
 			//  View a Course based on the given $id
@@ -29,7 +28,7 @@
 				{
 					$course = Course::find($id);
 
-					return response()->json($course, $response->getStatusCode());
+					return response()->json($course, 200);
 				}
 
 			//  Edit a Course based on the given $id
@@ -38,7 +37,7 @@
 					$course = Course::find($id);
 					$course->update($request->all());
 
-					return response()->json($course, $response->getStatusCode());
+					return response()->json($course, 200);
 				}
 
 			//  Delete a Course based on the given $id
@@ -47,7 +46,7 @@
 					$course = Course::find($id);
 					$course->delete();
 
-					return response()->json('Removed successfully', $response->getStatusCode());
+					return response()->json('Removed successfully', 200);
 				}
 
 			//  Display all the Course in the 'Courses' table
@@ -56,7 +55,7 @@
 					//   $courses = Course::all();
 					$courses = DB::table('courses')->get();
 
-					return response()->json($courses, $response->getStatusCode());
+					return response()->json($courses, 200);
 				}
 
 			// Get the Groups that studies the
@@ -65,7 +64,7 @@
 				{
 					$groups = Course::find($id)->groups;
 
-					return response()->json($groups, $response->getStatusCode());
+					return response()->json($groups, 200);
 				}
 
 			// Get the Tutors that teaches the
@@ -74,7 +73,7 @@
 				{
 					$tutors = Course::find($id)->tutors;
 
-					return response()->json($tutors, $response->getStatusCode());
+					return response()->json($tutors, 200);
 				}
 		}
  ?>

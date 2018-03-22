@@ -2,13 +2,14 @@
 
 	use DB;
 	use App\User;
+	use Validator;
 	use Illuminate\Http\Request;
 	use App\Http\Controllers\Controller;
 	use Illuminate\Hashing\BcryptHasher;
-	use Symfony\Component\HttpFoundation\Response;
 
 	class UsersController extends Controller
 		{
+
 			// Limiting the Methods that could be
 			// used without an 'api_token'
 			function __construct()
@@ -18,13 +19,13 @@
 
 			//method to create a new account
 			public function add(Request $request)
-				{
+				{				
 					$request['api_token'] = str_random(60);
 					$request['password'] = app('hash')->make($request['password']);
 					$user = User::create($request->all());
 					// dd($request->all());
 
-					return response()->json($user, $response->getStatusCode());
+					return response()->json($user, 200);
 				}
 
 			//method to view an account based on the given 'id'
@@ -32,7 +33,7 @@
 				{
 					$user = User::find($id);
 
-					return response()->json($user, $response->getStatusCode());
+					return response()->json($user, 200);
 				}
 
 			//method to edit an account based on the given 'id'
@@ -42,7 +43,7 @@
 					$request['password'] = app('hash')->make($request['password']);
 					$user->update($request->all());
 
-					return response()->json($user, $response->getStatusCode());
+					return response()->json($user, 200);
 				}
 
 			//method to delete an account based on the given 'id'
@@ -51,7 +52,7 @@
 					$user = User::find($id);
 					$user->delete();
 
-					return response()->json('Removed Successfully', $response->getStatusCode());
+					return response()->json('Removed Successfully', 200);
 				}
 
 			//method to display all accounts in the database
@@ -60,7 +61,7 @@
 					// $users = User::all();
 					$users = DB::table('users')->get();
 
-					return response()->json($users, $response->getStatusCode());
+					return response()->json($users, 200);
 				}
 
 			// Get the Groups that the User with the
@@ -69,7 +70,7 @@
 				{
 					$groups = User::find($id)->groups;
 
-					return response()->json($groups, $response->getStatusCode());
+					return response()->json($groups, 200);
 				}
 		}
  ?>

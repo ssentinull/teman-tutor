@@ -9,7 +9,6 @@
 	use Illuminate\Hashing\BcryptHasher;
 	use Illuminate\Support\Facades\Hash;
 	use Illuminate\Support\Facades\Input;
-	use Symfony\Component\HttpFoundation\Response;
 
 	class AuthentificationsController extends Controller
 		{
@@ -47,11 +46,11 @@
 
 									$user = User::where('email', $email)->first();
 
-									return response()->json(['status' => 'Successful Login', 'Role' => 'User' , 'user' => $user], $response->getStatusCode());
+									return response()->json(['status' => 'Successful Login', 'Role' => 'User' , 'user' => $user], 200);
 								}
 							else
 								{
-									return response()->json('Failed to Login', $response->getStatusCode());
+									return response()->json('Failed to Login', 422);
 								}
 						}
 					else
@@ -64,11 +63,11 @@
 
 									$tutor = Tutor::where('email', $email)->first();
 
-									return response()->json(['status' => 'Successful Login', 'Role' => 'Tutor', 'user' => $tutor], $response->getStatusCode());
+									return response()->json(['status' => 'Successful Login', 'Role' => 'Tutor', 'user' => $tutor], 200);
 								}
 							else
 								{
-									return response()->json('Failed to Login', $response->getStatusCode());
+									return response()->json('Failed to Login', 422);
 								}
 						}
 				}
@@ -80,14 +79,14 @@
 					if (User::where('email', '=', $email)->exists())
 						{
 							User::where('email', $email)->update(['remember_token' => null]);
-							return response()->json('Successful Logout', $response->getStatusCode());
+							return response()->json('Successful Logout', 200);
 						}
 					else
 						{
 							Tutor::where('email', $email)->update(['remember_token' => null]);
-							return response()->json('Successful Logout', $response->getStatusCode());
+							return response()->json('Successful Logout', 200);
 						}
-					return response()->json('Failed Logout', $response->getStatusCode());
+					return response()->json('Failed Logout', 422);
 				}
 		}
  ?>
