@@ -18,6 +18,25 @@
 			// Create a new Tutor Account
 			public function add(Request $request)
 				{
+			    $data = [
+			    	'email' => $request['email'],
+			    	'password' => $request['password'],
+			    	'name' => $request['name'],
+			    	'gender' => $request['gender']
+			    ];
+
+			    $validator = Validator::make($data, [
+			        'email' => 'required',
+			        'password' => 'required',
+			        'name' => 'required',
+			        'gender' => 'required'
+			    ]);
+
+			    if ($validator->fails()) 
+				    {
+							return response()->json('You have to fill the Email, Password, Name, Gender Form', 422);
+				    }
+
 					$request['api_token'] = str_random(60);
 					$request['password'] = app('hash')->make($request['password']);
 					$tutor = Tutor::create($request->all());
@@ -37,6 +56,25 @@
 			// Edit a Tutor based on the given 'id'
 			public function edit(Request $request, $id)
 				{
+			    $data = [
+			    	'email' => $request['email'],
+			    	'password' => $request['password'],
+			    	'name' => $request['name'],
+			    	'gender' => $request['gender']
+			    ];
+
+			    $validator = Validator::make($data, [
+			        'email' => 'required',
+			        'password' => 'required',
+			        'name' => 'required',
+			        'gender' => 'required'
+			    ]);
+
+			    if ($validator->fails()) 
+				    {
+							return response()->json('You have to fill the Email, Password, Name, Gender Form', 422);
+				    }
+
 					$tutor = Tutor::find($id);
 					$tutor->update($request->all());
 
