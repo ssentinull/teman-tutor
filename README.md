@@ -321,3 +321,30 @@
 * Data returned:  'Removed Succesfully'
 * Controller Used: Group_TutorController
 * Method Called: delete($group_id, $tutor_id)
+
+## Create a New Message
+* POST: '/messages'
+* Header: remember_token
+* Body: group_id, user_id, message
+* Return Format: json
+* Data returned:  group_id, user_id, message, created_at, updated_at
+* Controller Used: MessagesController
+* Method Called: add(Request $request)
+
+## View Messages of a Group
+* GET: '/messages/{group_id}'
+* Header: remember_token
+* Body: -
+* Return Format: json-array
+* Data returned:  group_id, user_id, message, created_at, updated_at
+* Controller Used: MessagesController
+* Method Called: view($group_id)
+
+## Delete a Single Message from a Group
+* DELETE: '/messages/{id}'
+* Header: remember_token 
+* Body: -
+* Return Format: json
+* Data returned:  'Removed Succesfully'
+* Controller Used: MessagesController
+* Method Called: delete($id)

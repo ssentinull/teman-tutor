@@ -65,5 +65,10 @@ $router->group(['prefix' => 'api'], function($router)
 		$router->put('apps/{group_id}/{tutor_id}', 'Group_TutorController@edit');
 		$router->put('accept/{group_id}/{tutor_id}', 'Group_TutorController@accept');
 		$router->delete('decline/{group_id}/{tutor_id}', 'Group_TutorController@decline');
+
+		// Routes for CRUD method on Message object
+		$router->post('messages', 'MessagesController@add');
+		$router->get('messages/{group_id}', 'MessagesController@view');
+		$router->delete('messages/{id}', 'MessagesController@delete');
 	});
 
