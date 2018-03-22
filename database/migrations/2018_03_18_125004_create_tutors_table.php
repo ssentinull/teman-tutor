@@ -21,6 +21,7 @@ class CreateTutorsTable extends Migration
             $table->string('gender');
             $table->date('birth_date');
             $table->string('address');
+            $table->string('phone_num');
             $table->integer('price_rate');
             $table->double('ipk', 3, 2);
             $table->integer('course_id')->unsigned();

@@ -32,8 +32,6 @@ class CreateGroupTutorTable extends Migration
      */
     public function down()
     {
-        Schema::table('group_tutor', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('group_tutor');
     }
 }
