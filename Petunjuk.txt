@@ -1,0 +1,5 @@
+Petunjuk menggunakan Laravel Lumen:
+- Nyalakan XAMPP
+- Pindah ke direktori project teman-tutor
+- Buka cmd di folder tersebut
+- Jalankan: php -S localhost:8008 -t public
