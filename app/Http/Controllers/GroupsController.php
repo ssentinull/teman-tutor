@@ -7,6 +7,7 @@
 	use App\Http\Controllers\Controller;
 	use Illuminate\Hashing\BcryptHasher;
 	use Illuminate\Support\Facades\Input;
+	use Symfony\Component\HttpFoundation\Response;
 
 	class GroupsController extends Controller
 		{
@@ -33,7 +34,7 @@
 						'is_accepted' => 1,
 					]);
 
-					return response()->json(array('group' => $group, 'group_user' => $group_user));
+					return response()->json(array('group' => $group, 'group_user' => $group_user), $response->getStatusCode());
 				}
 
 			//  View a Group based on the given $id
@@ -41,7 +42,7 @@
 				{
 					$group = Group::find($id);
 
-					return response()->json($group);
+					return response()->json($group, $response->getStatusCode());
 				}
 
 			//  Edit a Group based on the given $id
@@ -50,7 +51,7 @@
 					$group = Group::find($id);
 					$group->update($request->all());
 
-					return response()->json($group);
+					return response()->json($group, $response->getStatusCode());
 				}
 
 			//  Delete a Group based on the given $id
@@ -59,7 +60,7 @@
 					$group = Group::find($id);
 					$group->delete();
 
-					return response()->json('Removed successfully.');
+					return response()->json('Removed Successfully', $response->getStatusCode());
 				}
 
 			// Display all the Groups in the 'Groups' table
@@ -68,7 +69,7 @@
 					//   $groups = Group::all();
 					$groups = DB::table('groups')->get();
 
-					return response()->json($groups);
+					return response()->json($groups, $response->getStatusCode());
 				}
 
 			// Get the Users that are enrolled to the
@@ -77,7 +78,7 @@
 				{
 					$users = Group::find($id)->users;
 
-					return response()->json($users);
+					return response()->json($users, $response->getStatusCode());
 				}
 		}
  ?>

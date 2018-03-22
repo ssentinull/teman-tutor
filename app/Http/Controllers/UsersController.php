@@ -1,10 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-	use App\User;
-	use App\Http\Controllers\Controller;
-	use Illuminate\Http\Request;
-	use Illuminate\Hashing\BcryptHasher;
 	use DB;
+	use App\User;
+	use Illuminate\Http\Request;
+	use App\Http\Controllers\Controller;
+	use Illuminate\Hashing\BcryptHasher;
+	use Symfony\Component\HttpFoundation\Response;
 
 	class UsersController extends Controller
 		{
@@ -23,14 +24,15 @@
 					$user = User::create($request->all());
 					// dd($request->all());
 
-					return response()->json($user);
+					return response()->json($user, $response->getStatusCode());
 				}
 
 			//method to view an account based on the given 'id'
 			public function view($id)
 				{
 					$user = User::find($id);
-					return response()->json($user);
+
+					return response()->json($user, $response->getStatusCode());
 				}
 
 			//method to edit an account based on the given 'id'
@@ -40,7 +42,7 @@
 					$request['password'] = app('hash')->make($request['password']);
 					$user->update($request->all());
 
-					return response()->json($user);
+					return response()->json($user, $response->getStatusCode());
 				}
 
 			//method to delete an account based on the given 'id'
@@ -49,7 +51,7 @@
 					$user = User::find($id);
 					$user->delete();
 
-					return response()->json('Removed successfully.');
+					return response()->json('Removed Successfully', $response->getStatusCode());
 				}
 
 			//method to display all accounts in the database
@@ -57,7 +59,8 @@
 				{
 					// $users = User::all();
 					$users = DB::table('users')->get();
-					return response()->json($users);
+
+					return response()->json($users, $response->getStatusCode());
 				}
 
 			// Get the Groups that the User with the
@@ -65,7 +68,8 @@
 			public function groups($id)
 				{
 					$groups = User::find($id)->groups;
-					return response()->json($groups);
+
+					return response()->json($groups, $response->getStatusCode());
 				}
 		}
  ?>

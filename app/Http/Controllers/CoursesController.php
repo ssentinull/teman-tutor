@@ -1,10 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-	use App\Course;
-	use App\Http\Controllers\Controller;
-	use Illuminate\Http\Request;
-	use Illuminate\Hashing\BcryptHasher;
 	use DB;
+	use App\Course;
+	use Illuminate\Http\Request;
+	use App\Http\Controllers\Controller;
+	use Illuminate\Hashing\BcryptHasher;
+	use Symfony\Component\HttpFoundation\Response;
 
 	class CoursesController extends Controller
 		{
@@ -17,15 +18,10 @@
 
 			//  Create a new Course based on the input
 			public function add(Request $request)
-				{
-					// The id of the User who created this
-					// group should be included in the $request
-					
-					// dd($data->all());
-					
+				{	
 					$course = Course::create($request->all());
 
-					return response()->json($course);
+					return response()->json($course, $response->getStatusCode());
 				}
 
 			//  View a Course based on the given $id
@@ -33,7 +29,7 @@
 				{
 					$course = Course::find($id);
 
-					return response()->json($course);
+					return response()->json($course, $response->getStatusCode());
 				}
 
 			//  Edit a Course based on the given $id
@@ -42,7 +38,7 @@
 					$course = Course::find($id);
 					$course->update($request->all());
 
-					return response()->json($course);
+					return response()->json($course, $response->getStatusCode());
 				}
 
 			//  Delete a Course based on the given $id
@@ -51,7 +47,7 @@
 					$course = Course::find($id);
 					$course->delete();
 
-					return response()->json('Removed successfully.');
+					return response()->json('Removed successfully', $response->getStatusCode());
 				}
 
 			//  Display all the Course in the 'Courses' table
@@ -60,7 +56,7 @@
 					//   $courses = Course::all();
 					$courses = DB::table('courses')->get();
 
-					return response()->json($courses);
+					return response()->json($courses, $response->getStatusCode());
 				}
 
 			// Get the Groups that studies the
@@ -69,7 +65,7 @@
 				{
 					$groups = Course::find($id)->groups;
 
-					return response()->json($groups);
+					return response()->json($groups, $response->getStatusCode());
 				}
 
 			// Get the Tutors that teaches the
@@ -78,7 +74,7 @@
 				{
 					$tutors = Course::find($id)->tutors;
 
-					return response()->json($tutors);
+					return response()->json($tutors, $response->getStatusCode());
 				}
 		}
  ?>

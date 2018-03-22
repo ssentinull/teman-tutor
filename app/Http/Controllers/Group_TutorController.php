@@ -6,7 +6,8 @@
 	use Illuminate\Http\Request;
 	use App\Http\Controllers\Controller;
 	use Illuminate\Hashing\BcryptHasher;
-	use Illuminate\Support\Facades\Input;
+	use Illuminate\Support\Facades\Input;	
+	use Symfony\Component\HttpFoundation\Response;
 
 	class Group_TutorController extends Controller
 		{
@@ -31,7 +32,7 @@
 						'is_accepted' => 0,
 					]);
 
-					return response()->json($group_tutor);
+					return response()->json($group_tutor, $response->getStatusCode());
 				}	
 
 			// Fetch the Appontments of the User with
@@ -62,7 +63,7 @@
 								}
 						}
 						
-					return response($app1);
+					return response()->json($app1, $response->getStatusCode());
 				}
 
 			//  Edit an Appointment based on the given $id
@@ -76,7 +77,7 @@
 																	->where('group_id', $group_id)
 																	->get();
 
-					return response()->json($group_tutor);
+					return response()->json($group_tutor, $response->getStatusCode());
 				}
 
 			// Accepting an Appointment request from the Group with the  
@@ -91,7 +92,7 @@
 																	->where('group_id', $group_id)
 																	->get();
 
-					return response()->json($group_tutor);
+					return response()->json($group_tutor, $response->getStatusCode());
 				}
 
 			// Declining an Appointment request from the Group with the  
@@ -102,7 +103,7 @@
 																	->where('group_id', $group_id)
 																	->delete();
 
-					return response()->json("Declined Successful");
+					return response()->json('Declined Successful', $response->getStatusCode());
 				}
 		}
  ?>

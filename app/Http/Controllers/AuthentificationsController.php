@@ -7,8 +7,9 @@
 	use Illuminate\Http\Request;
 	use App\Http\Controllers\Controller;
 	use Illuminate\Hashing\BcryptHasher;
-	use Illuminate\Support\Facades\Input;
 	use Illuminate\Support\Facades\Hash;
+	use Illuminate\Support\Facades\Input;
+	use Symfony\Component\HttpFoundation\Response;
 
 	class AuthentificationsController extends Controller
 		{
@@ -46,18 +47,16 @@
 
 									$user = User::where('email', $email)->first();
 
-									return response()->json(['status' => 'Successful Login', 'user' => $user]);
+									return response()->json(['status' => 'Successful Login', 'Role' => 'User' , 'user' => $user], $response->getStatusCode());
 								}
 							else
 								{
-									return 'Fail to Login';
+									return response()->json('Failed to Login', $response->getStatusCode());
 								}
 						}
 					else
 						{
 							$tutor = Tutor::where('email', $email)->first();
-
-							// dd('hello');
 
 							if (Hash::check($request['password'], $tutor->password))
 								{
@@ -65,11 +64,11 @@
 
 									$tutor = Tutor::where('email', $email)->first();
 
-									return response()->json(['status' => 'Successful Login 2', 'user' => $tutor]);
+									return response()->json(['status' => 'Successful Login', 'Role' => 'Tutor', 'user' => $tutor], $response->getStatusCode());
 								}
 							else
 								{
-									return 'Fail to Login';
+									return response()->json('Failed to Login', $response->getStatusCode());
 								}
 						}
 				}
@@ -81,14 +80,14 @@
 					if (User::where('email', '=', $email)->exists())
 						{
 							User::where('email', $email)->update(['remember_token' => null]);
-							return 'Successful Logout User';
+							return response()->json('Successful Logout', $response->getStatusCode());
 						}
 					else
 						{
 							Tutor::where('email', $email)->update(['remember_token' => null]);
-							return 'Successful Logout Tutor';
+							return response()->json('Successful Logout', $response->getStatusCode());
 						}
-					return 'Failed Logout';
+					return response()->json('Failed Logout', $response->getStatusCode());
 				}
 		}
  ?>

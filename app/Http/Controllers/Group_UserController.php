@@ -6,6 +6,7 @@
 	use App\Http\Controllers\Controller;
 	use Illuminate\Hashing\BcryptHasher;
 	use Illuminate\Support\Facades\Input;
+	use Symfony\Component\HttpFoundation\Response;
 
 	class Group_UserController extends Controller
 		{
@@ -28,7 +29,7 @@
 						'is_accepted' => 0,
 					]);
 
-					return response()->json($group_user);
+					return response()->json($group_user, $response->getStatusCode());
 				}
 
 			// Accepting a User with the given $user_id that's 
@@ -43,7 +44,7 @@
 																	->where('group_id', $group_id)
 																	->get();
 
-					return response()->json($group_user);
+					return response()->json($group_user, $response->getStatusCode());
 				}
 
 			// Changing the status of the User with the given $user_id
@@ -58,7 +59,7 @@
 																	->where('group_id', $group_id)
 																	->get();
 
-					return response()->json($group_user);
+					return response()->json($group_user, $response->getStatusCode());
 				}
 
 			// Cancelling or Declining a join request for the Group with
@@ -71,7 +72,7 @@
 																	->where('group_id', $group_id)
 																	->delete();
 
-					return response()->json("Remove \ Cancel \ Decline Successfully");
+					return response()->json('Successful Remove \ Cancel \ Decline', $response->getStatusCode());
 				}
 		}
  ?>
